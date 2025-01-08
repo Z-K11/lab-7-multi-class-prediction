@@ -4,6 +4,7 @@ from sklearn import datasets
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
+import pandas as pd
 # Start
 plotting_colors = 'ryb'
 plot_step =0.2
