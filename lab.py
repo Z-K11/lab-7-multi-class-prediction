@@ -64,7 +64,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
             idx=np.where(Y==1)
             if np.any(idx):
                 set_.remove(i)
-                plt.scatter(X[idx,0],X[idx,1],label=y,cmap=plt.cm.RdYlBu,edgecolor='black',s=15)
+                plt.scatter(X[idx,0],X[idx,1],label=Y,cmap=plt.cm.RdYlBu,edgecolor='black',s=15)
         for i in set_:
             idx=np.where(iris.target==i)
             plt.scatter(X[idx,0],X[idx,1],marker='x',color='black')
