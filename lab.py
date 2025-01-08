@@ -27,4 +27,12 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     '''unction in Matplotlib is used to automatically adjust the layout of a figure to ensure 
     that subplots and other plot elements (like titles, axis labels, and legends) do not overlap.
     '''
-    
+    z = Model.predict(np.c_[xx.ravel(),yy.ravel])
+    '''Used to generate predictions from the machine learning model for every point on the grid
+    here xx and yy are the 2d grid arrays the .ravel() functions flatens a 2d array into a 1darray
+    so we end up with a row matrix where when the first row ended in the original matrix ? the 2nd
+    row added at the end of the first row and the third row is added at the end of the second row
+    which was added at the end of the first row so we have one large row matrix
+    the np.c_ function concatinates arrays along the y axis basically the first row matrix is 
+    converted into column matrix and used as first matrix, the second row matrix is also converted
+    into a column matrix and added as the second column of the concatenated matrix '''
