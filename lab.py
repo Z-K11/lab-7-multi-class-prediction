@@ -69,3 +69,9 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
             idx=np.where(iris.target==i)
             plt.scatter(X[idx,0],X[idx,1],marker='x',color='black')
         plt.savefig('./pngFiles/contour_plot.png')
+def plot_probability_array(X,probability_array):
+    plot_array=np.zeros((X.shape[0],30))
+    '''plot_array is going to have the same rows as X becuase X.shape[0] returns the number of rows
+    of x the second number 30 means 30 columns it is the input to the number of rows of the array
+    so in the end plot_array is going to have rows equal to number of rows of array x 30 columns 
+    all filled with 0 '''
