@@ -75,3 +75,11 @@ def plot_probability_array(X,probability_array):
     of x the second number 30 means 30 columns it is the input to the number of rows of the array
     so in the end plot_array is going to have rows equal to number of rows of array x 30 columns 
     all filled with 0 '''
+    col_start = 0
+    ones =np.ones((X.shape[0],30))
+    '''same as plot_array but ones is going to have 1'''
+    for class_,col_end in enumerate([10,20,30]):
+        plot_array[:,col_start:col_end]=np.repeat(probability_array[:,class_].reshape(-1,1),10,axis=1)
+        col_start=col_end
+    '''plot_array[:,col_start:col_end] is using slices to select only subset of rows and columns
+    from plot_array[]'''
