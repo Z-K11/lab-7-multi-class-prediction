@@ -38,3 +38,6 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     into a column matrix and added as the second column of the concatenated matrix '''
     z = z.reshape(xx.shape)
     '''Reshape aligns the predictions with the grid so that they can be visualized'''
+    cs = plt.cont(xx,yy,z,cmap=plt.cm.RdYlBu)
+    '''This shows the decision boundary where the model transitions between different predicted
+    classes '''
