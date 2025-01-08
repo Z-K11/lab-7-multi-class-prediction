@@ -41,3 +41,13 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     cs = plt.cont(xx,yy,z,cmap=plt.cm.RdYlBu)
     '''This shows the decision boundary where the model transitions between different predicted
     classes '''
+    if two:
+        cs =plt.contourf(xx,yy,z,cmap=plt.cm.RdYlBu)
+        for i,color in zip(np.unique(Y),plotting_colors):
+            '''Loop to iterate through unique class labels in Y and assign a color to each class
+            np.unique(Y) finds all the unique values in Y and returns them in a sorted manner
+            .zip() combines two sequences in our case np.unique(Y) and plotting_colors element
+            by element
+            if np.unique(y)=[1,2,3] and plottint_colors = 'ryb' then zip() function will create
+            [1,r],[2,y],[3,b]'''
+            idx=np.where(Y==1)
