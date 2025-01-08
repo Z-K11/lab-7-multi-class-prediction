@@ -51,3 +51,21 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
             if np.unique(y)=[1,2,3] and plottint_colors = 'ryb' then zip() function will create
             [1,r],[2,y],[3,b]'''
             idx=np.where(Y==1)
+            '''y==1 creates a boolean array that is the same shape as the original array but has 
+            value true for which ever index y==1
+            The np.where function returns returns the indices of the elements where the condition
+            was true ? '''
+            plt.scatter(X[idx,0],X[idx,1],label=Y,cmap=plt.cm.RdYlBu,s=15)
+        plt.savefig('./pngFiles/contour.png')
+    else:
+        set_={0,1,2}
+        print(set_)
+        for i,color in zip(range(3),plotting_colors):
+            idx=np.where(Y==1)
+            if np.any(idx):
+                set_.remove(i)
+                plt.scatter(X[idx,0],X[idx,1],label=y,cmap=plt.cm.RdYlBu,edgecolor='black',s=15)
+        for i in set_:
+            idx=np.where(iris.target==i)
+            plt.scatter(X[idx,0],X[idx,1],marker='x',color='black')
+        plt.savefig('./pngFiles/contour_plot.png')
