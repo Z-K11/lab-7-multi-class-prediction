@@ -24,7 +24,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     is taken as x-axis i.e for rows and the second for y-axist i.e fro clolumns rows repeat
     array 1 values and column repeates array 2 values '''
     plt.tight_layout(h_pad=0.5,w_pad=0.5,pad=2.5)
-    '''unction in Matplotlib is used to automatically adjust the layout of a figure to ensure 
+    '''function in Matplotlib is used to automatically adjust the layout of a figure to ensure 
     that subplots and other plot elements (like titles, axis labels, and legends) do not overlap.
     '''
     z = Model.predict(np.c_[xx.ravel(),yy.ravel])
@@ -36,3 +36,5 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     the np.c_ function concatinates arrays along the y axis basically the first row matrix is 
     converted into column matrix and used as first matrix, the second row matrix is also converted
     into a column matrix and added as the second column of the concatenated matrix '''
+    z = z.reshape(xx.shape)
+    '''Reshape aligns the predictions with the grid so that they can be visualized'''
