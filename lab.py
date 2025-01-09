@@ -130,3 +130,4 @@ print("Accuracy Score",accuracy_score(predictions,softmax_regression))
 from sklearn import svm
 model = svm.SVC(kernel='linear',gamma=0.5,probability=True).fit(x,y)
 svm_predictions = model.predict(x)
+print("svm Accuracy score ",accuracy_score(y,svm_predictions))
