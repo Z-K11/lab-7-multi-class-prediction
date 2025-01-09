@@ -21,7 +21,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     what this function does is create a 1d array and populates it with equally spaced
     values between from min to before max
     np.meshgrid(array1,array2) takes 2 1d arrays and combines the to create a grid the first
-    is taken as x-axis i.e for rows and the second for y-axist i.e fro clolumns rows repeat
+    is taken as x-axis i.e for rows and the second for y-axist i.e from columns rows repeat
     array 1 values and column repeates array 2 values '''
     plt.tight_layout(h_pad=0.5,w_pad=0.5,pad=2.5)
     '''function in Matplotlib is used to automatically adjust the layout of a figure to ensure 
@@ -81,5 +81,26 @@ def plot_probability_array(X,probability_array):
     for class_,col_end in enumerate([10,20,30]):
         plot_array[:,col_start:col_end]=np.repeat(probability_array[:,class_].reshape(-1,1),10,axis=1)
         col_start=col_end
-    '''plot_array[:,col_start:col_end] is using slices to select only subset of rows and columns
+    '''plot_array[:,co
+    l_start:col_end] is using slices to select only subset of rows and columns
     from plot_array[]'''
+    plt.imshow(plot_array)
+    '''plt.imshow() takes a 2d array as input and visualizes it as an image'''
+    plt.xticks([])
+    '''ticks are markers along an axis xticks mean ticks along x axis here we are passing an empty
+    list meaning there will be no markers along any axis'''
+    plt.ylabel("samples")
+    '''Is the ylabel of y axis'''
+    plt.xlabel("Probability of 3 classes")
+    '''label of x axis'''
+    plt.colorbar()
+    '''plt.colorbar() adds colorbar to the plot A color bar is a visual representation of the 
+    mapping between numeric values and colors assigned to them'''
+    plt.savefig("./pngFiles/probability_plot")
+pair =[1,3]
+'''1darray'''
+iris = datasets.load_iris()
+'''loads the iris data set from sklearn.dataset or whatever'''
+x = iris.data[:,pair]
+'''rox,columns : for rows selets all the rows, pair for columns selects column 1 and 3.
+as our feature dataset'''
