@@ -127,4 +127,6 @@ softmax_regression = np.argmax(probability,axis=1)
 print(softmax_regression)
 predictions = logregression.predict(x)
 print("Accuracy Score",accuracy_score(predictions,softmax_regression))
-
+from sklearn import svm
+model = svm.SVC(kernel='linear',gamma=0.5,probability=True).fit(x,y)
+svm_predictions = model.predict(x)
