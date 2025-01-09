@@ -14,7 +14,7 @@ def decision_boundary(X,Y,Model,iris,two=None):
     '''x is a 2d array contains rows and columns x[rows,columns]x[:,:]selects all rows and columns
 x[:,0] selects all rows from the 0th column so x[:,0].min() finds the minimum value from all
 the rows in column 0 and x[:,0].max() finds the maximum value from all the rows in 0th Column'''
-    y_min,y_max=Y[:,0].min()-1,Y[:,0].max()+1
+    y_min,y_max=X[:, 1].min() - 1, X[:, 1].max() + 1
     # this is the same as above explanation
     xx,yy=np.meshgrid(np.arange(x_min,x_max,plot_step),np.arange(y_min,y_max,plot_step))
     '''np.arange(min,max,step)takes a minimum value a maximum value and a step_size
@@ -27,7 +27,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     '''function in Matplotlib is used to automatically adjust the layout of a figure to ensure 
     that subplots and other plot elements (like titles, axis labels, and legends) do not overlap.
     '''
-    z = Model.predict(np.c_[xx.ravel(),yy.ravel])
+    z = Model.predict(np.c_[xx.ravel(),yy.ravel()])
     '''Used to generate predictions from the machine learning model for every point on the grid
     here xx and yy are the 2d grid arrays the .ravel() functions flatens a 2d array into a 1darray
     so we end up with a row matrix where when the first row ended in the original matrix ? the 2nd
@@ -38,7 +38,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     into a column matrix and added as the second column of the concatenated matrix '''
     z = z.reshape(xx.shape)
     '''Reshape aligns the predictions with the grid so that they can be visualized'''
-    cs = plt.cont(xx,yy,z,cmap=plt.cm.RdYlBu)
+    cs = plt.contourf(xx,yy,z,cmap=plt.cm.RdYlBu)
     '''This shows the decision boundary where the model transitions between different predicted
     classes '''
     if two:
@@ -131,3 +131,4 @@ from sklearn import svm
 model = svm.SVC(kernel='linear',gamma=0.5,probability=True).fit(x,y)
 svm_predictions = model.predict(x)
 print("svm Accuracy score ",accuracy_score(y,svm_predictions))
+decision_boundary(x,y,model,iris)
