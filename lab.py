@@ -112,5 +112,19 @@ plt.xlabel("Sepal Width (cm)")
 plt.ylabel("Petal Width")
 plt.savefig('./pngFiles/iris.png')
 logregression = LogisticRegression(random_state=2).fit(x,y)
+'''Fiting datasets to the model'''
 probability =logregression.predict_proba(x)
+'''saving predictions'''
 plot_probability_array(x,probability)
+'''plotting the predictions using the function'''
+print(probability[0,:])
+print(probability[0,:].sum())
+'''sums the contants of all the columns in row 0 ?'''
+print(np.argmax(probability[0,:]))
+'''aplies the argmax function for softmax_regression'''
+softmax_regression = np.argmax(probability,axis=1)
+'''applying the argmax function to the predictions made by the model'''
+print(softmax_regression)
+predictions = logregression.predict(x)
+print("Accuracy Score",accuracy_score(predictions,softmax_regression))
+
