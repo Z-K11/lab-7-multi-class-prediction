@@ -10,6 +10,7 @@ plotting_colors = 'ryb'
 plot_step =0.2
 
 def decision_boundary(X,Y,Model,iris,two=None):
+    
     x_min,x_max=X[:,0].min()-1,X[:,0].max()+1
     '''x is a 2d array contains rows and columns x[rows,columns]x[:,:]selects all rows and columns
 x[:,0] selects all rows from the 0th column so x[:,0].min() finds the minimum value from all
@@ -23,6 +24,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
     np.meshgrid(array1,array2) takes 2 1d arrays and combines the to create a grid the first
     is taken as x-axis i.e for rows and the second for y-axist i.e from columns rows repeat
     array 1 values and column repeates array 2 values '''
+    plt.clf()
     plt.tight_layout(h_pad=0.5,w_pad=0.5,pad=2.5)
     '''function in Matplotlib is used to automatically adjust the layout of a figure to ensure 
     that subplots and other plot elements (like titles, axis labels, and legends) do not overlap.
@@ -50,13 +52,15 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
             by element
             if np.unique(y)=[1,2,3] and plottint_colors = 'ryb' then zip() function will create
             [1,r],[2,y],[3,b]'''
-            idx=np.where(Y==1)
+            idx=np.where(Y==i)
             '''y==1 creates a boolean array that is the same shape as the original array but has 
             value true for which ever index y==1
             The np.where function returns returns the indices of the elements where the condition
             was true ? '''
-            plt.scatter(X[idx,0],X[idx,1],label=Y,cmap=plt.cm.RdYlBu,s=15)
+            plt.scatter(X[idx, 0], X[idx, 1], label=y, cmap=plt.cm.RdYlBu, edgecolor='black', s=15)
+
         plt.savefig('./pngFiles/contour.png')
+        
     else:
         set_={0,1,2}
         print(set_)
@@ -84,6 +88,7 @@ def plot_probability_array(X,probability_array):
     '''plot_array[:,co
     l_start:col_end] is using slices to select only subset of rows and columns
     from plot_array[]'''
+    plt.clf()
     plt.imshow(plot_array)
     '''plt.imshow() takes a 2d array as input and visualizes it as an image'''
     plt.xticks([])
@@ -107,6 +112,7 @@ as our feature dataset'''
 y=iris.target
 array=np.unique(y)
 '''returns unique values from within y to array'''
+plt.clf()
 plt.scatter(x[:,0],x[:,1],c=y,cmap=plt.cm.RdYlBu)
 plt.xlabel("Sepal Width (cm)")
 plt.ylabel("Petal Width")
@@ -131,4 +137,4 @@ from sklearn import svm
 model = svm.SVC(kernel='linear',gamma=0.5,probability=True).fit(x,y)
 svm_predictions = model.predict(x)
 print("svm Accuracy score ",accuracy_score(y,svm_predictions))
-decision_boundary(x,y,model,iris)
+decision_boundary(x,y,model,iris,1)
