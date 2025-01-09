@@ -104,3 +104,10 @@ iris = datasets.load_iris()
 x = iris.data[:,pair]
 '''rox,columns : for rows selets all the rows, pair for columns selects column 1 and 3.
 as our feature dataset'''
+y=iris.target
+array=np.unique(y)
+'''returns unique values from within y to array'''
+plt.scatter(x[:,0],x[:,1],c=y,cmap=plt.cm.RdYlBu)
+plt.xlabel("Sepal Width (cm)")
+plt.ylabel("Petal Width")
+plt.savefig('./pngFiles/iris.png')
