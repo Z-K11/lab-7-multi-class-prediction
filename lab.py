@@ -169,3 +169,9 @@ for j,model in enumerate(my_models):
     '''real_class will be tuple which will contain indices of elemnts in model.classes_'''
     probability_array[:,j]=model.predict_proba(x)[:,real_class][:,0]
     '''Probability of each class belonging to first sample'''
+print(probability_array[0,:])
+'''prints the values of row 0 columns all '''
+'''as each of these probabilities is of belong to actual class the sum will noe be equal to 1'''
+print(probability_array[0,:].sum())
+plot_probability_array(x,probability_array)
+
