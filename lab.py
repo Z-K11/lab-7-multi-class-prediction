@@ -159,4 +159,5 @@ for class_ in np.unique(y):
     '''assigns the value of class_ to the indices where y==class_ is  true ?'''
     '''assigning samples to our target label'''
     temp_y[y!=class_]=dummy_class
-    '''creating dummy class'''
+    '''Assigns the value of dummy_class to every other index where y not equal to class_
+    in our case it is y.max() +1 which is going to be three '''
