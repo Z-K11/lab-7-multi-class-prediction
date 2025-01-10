@@ -138,8 +138,25 @@ model = svm.SVC(kernel='linear',gamma=0.5,probability=True).fit(x,y)
 svm_predictions = model.predict(x)
 print("svm Accuracy score ",accuracy_score(y,svm_predictions))
 decision_boundary(x,y,model,iris,1)
-'''Till now we have done sofmtax regression and svm. Now we shall perform one vs all classification'''
+'''Till now we have done sofmtax regression and svm. Now we shall perform one vs all classification
+also known as one vs rest'''
 #Dummy Class
 dummy_class = y.max()+1
 '''y = iris.target(), iris.data contains feature values and iris.target contains targeted labels
 or for simpletons answers '''
+my_models =[]
+'''an empty list'''
+for class_ in np.unique(y):
+    '''y has only three unique values ? 0,1,2 so we wil have three iterations to this for loop ?'''
+    select=(y==class_)
+    '''now suppose for first iteration class will be 0 ? y={0,1,2,0,0,0,2,0,1......} what happens is,
+    select is a numpy array which will have same size and number of elements = y and select will
+    be true for every index where y = current class 0 and false
+    for every index where y != 0 this goes for 1st iteration only, '''
+    temp_y=np.zeros(y.shape)
+    '''will create an array of zeros with the exact same shape as y'''
+    temp_y[y==class_]=class_
+    '''assigns the value of class_ to the indices where y==class_ is  true ?'''
+    '''assigning samples to our target label'''
+    temp_y[y!=class_]=dummy_class
+    '''creating dummy class'''
