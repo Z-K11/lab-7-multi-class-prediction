@@ -138,3 +138,8 @@ model = svm.SVC(kernel='linear',gamma=0.5,probability=True).fit(x,y)
 svm_predictions = model.predict(x)
 print("svm Accuracy score ",accuracy_score(y,svm_predictions))
 decision_boundary(x,y,model,iris,1)
+'''Till now we have done sofmtax regression and svm. Now we shall perform one vs all classification'''
+#Dummy Class
+dummy_class = y.max()+1
+'''y = iris.target(), iris.data contains feature values and iris.target contains targeted labels
+or for simpletons answers '''
