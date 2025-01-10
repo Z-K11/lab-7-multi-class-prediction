@@ -9,7 +9,7 @@ import pandas as pd
 plotting_colors = 'ryb'
 plot_step =0.2
 
-def decision_boundary(X,Y,Model,iris,two=None):
+def decision_boundary(X,Y,Model,iris,name,two=None):
     
     x_min,x_max=X[:,0].min()-1,X[:,0].max()+1
     '''x is a 2d array contains rows and columns x[rows,columns]x[:,:]selects all rows and columns
@@ -59,7 +59,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
             was true ? '''
             plt.scatter(X[idx, 0], X[idx, 1], label=y, cmap=plt.cm.RdYlBu, edgecolor='black', s=15)
 
-        plt.savefig('./pngFiles/contour.png')
+        plt.savefig('./pngFiles/contour',name,'.png')
         
     else:
         set_={0,1,2}
@@ -72,7 +72,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
         for i in set_:
             idx=np.where(iris.target==i)
             plt.scatter(X[idx,0],X[idx,1],marker='x',color='black')
-        plt.savefig('./pngFiles/contour_plot.png')
+        plt.savefig('./pngFiles/contour_plot'+str(name)+'.png')
 def plot_probability_array(X,probability_array):
     plot_array=np.zeros((X.shape[0],30))
     '''plot_array is going to have the same rows as X becuase X.shape[0] returns the number of rows
@@ -88,7 +88,6 @@ def plot_probability_array(X,probability_array):
     '''plot_array[:,co
     l_start:col_end] is using slices to select only subset of rows and columns
     from plot_array[]'''
-    plt.clf()
     plt.imshow(plot_array)
     '''plt.imshow() takes a 2d array as input and visualizes it as an image'''
     plt.xticks([])
@@ -137,7 +136,7 @@ from sklearn import svm
 model = svm.SVC(kernel='linear',gamma=0.5,probability=True).fit(x,y)
 svm_predictions = model.predict(x)
 print("svm Accuracy score ",accuracy_score(y,svm_predictions))
-decision_boundary(x,y,model,iris,1)
+decision_boundary(x,y,model,iris,'first')
 '''Till now we have done sofmtax regression and svm. Now we shall perform one vs all classification
 also known as one vs rest'''
 #Dummy Class
@@ -161,3 +160,6 @@ for class_ in np.unique(y):
     temp_y[y!=class_]=dummy_class
     '''Assigns the value of dummy_class to every other index where y not equal to class_
     in our case it is y.max() +1 which is going to be three '''
+    model=SVC(kernel='linear',gamma=0.5,probability=True)
+    my_models.append(model.fit(x,temp_y))
+    decision_boundary(x,y,model,iris,class_)
