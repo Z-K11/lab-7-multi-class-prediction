@@ -59,7 +59,7 @@ the rows in column 0 and x[:,0].max() finds the maximum value from all the rows 
             was true ? '''
             plt.scatter(X[idx, 0], X[idx, 1], label=y, cmap=plt.cm.RdYlBu, edgecolor='black', s=15)
 
-        plt.savefig('./pngFiles/contour',name,'.png')
+        plt.savefig('./pngFiles/contour'+str(name)+'.png')
         
     else:
         set_={0,1,2}
@@ -174,4 +174,35 @@ print(probability_array[0,:])
 '''as each of these probabilities is of belong to actual class the sum will noe be equal to 1'''
 print(probability_array[0,:].sum())
 plot_probability_array(x,probability_array)
+one_vs_all =np.argmax(probability_array,axis=1)
+print(one_vs_all)
+print(accuracy_score(y,one_vs_all))
+'''accuracy score will take 2 predictions as input first are the acutal ones 2nd are ours'''
+print(accuracy_score(y,svm_predictions))
+print("Accuracy of svm from scikit learn is higher because scikitlearn uses one vs one  ")
+'''Let's compute one vs one '''
+classes_=set(np.unique(y))
+k=len(classes_)
+k=(k-1)/2
+'''k=3 now we will train a two class classifier on each pair of classes '''
+pairs =[]
+left_overs=classes_.copy()
+print(classes_)
+print(left_overs)
+print(left_overs)
+for class_ in classes_:
+    left_overs.remove(class_)
+    for second_class in left_overs:
+        pairs.append(str(class_)+' and '+str(second_class))
+        print("class{} vs class{}".format(class_,second_class))
+        temp_y=np.zeros(y.shape)
+        select=np.logical_or(y==class_,y==second_class)
+        model=SVC(kernel='linear',gamma=0.5,probability=True)
+        model.fit(x[select,:],y[select])
+        my_models.append(model)
+        decision_boundary(x[select,:],y[select],model,iris,second_class+3,two=True)
+
+
+
+
 
