@@ -163,3 +163,9 @@ for class_ in np.unique(y):
     model=SVC(kernel='linear',gamma=0.5,probability=True)
     my_models.append(model.fit(x,temp_y))
     decision_boundary(x,y,model,iris,class_)
+probability_array =np.zeros((x.shape[0],3))
+for j,model in enumerate(my_models):
+    real_class=np.where(np.array(model.classes_)!=3)[0]
+    '''real_class will be tuple which will contain indices of elemnts in model.classes_'''
+    probability_array[:,j]=model.predict_proba(x)[:,real_class][:,0]
+    '''Probability of each class belonging to first sample'''
