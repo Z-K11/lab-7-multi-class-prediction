@@ -201,6 +201,18 @@ for class_ in classes_:
         model.fit(x[select,:],y[select])
         my_models.append(model)
         decision_boundary(x[select,:],y[select],model,iris,second_class+3,two=True)
+print(pairs)
+majority_vote_array = np.zeros((x.shape[0],3))
+majority_vote_dict={}
+for j,(model,pair) in enumerate(zip(my_models,pairs)):
+    majority_vote_dict[pair]=model.predict(x)
+    majority_vote_array[:,j]=model.predict(x)
+print(pd.DataFrame((majority_vote_dict)).head(10))
+one_vs_one=np.array([np.bincount(sample.astype(int)).argmax() for sample  in majority_vote_array]) 
+print(accuracy_score(y,one_vs_one))
+print(accuracy_score(predictions,one_vs_one))
+
+
 
 
 
